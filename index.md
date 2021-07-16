@@ -63,7 +63,8 @@ void setup() {
   // testing
   Serial.print("Testing DC Motor...");
 }
-
+```C++
+```
 void loop() {
   // Move the DC motor forward at maximum speed
   Serial.println("Moving Forward");
