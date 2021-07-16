@@ -10,7 +10,7 @@ I am working on a gesture controlled car using arduino with an esp32 chip
 # Final Milestone
 ...
 
-[![Final Milestone]((https://user-images.githubusercontent.com/87206629/125999676-39297fd8-5ab7-4b01-b41a-6bbd4ff16098.png){:target="_blank" rel="noopener"}
+[![Final Milestone](https://user-images.githubusercontent.com/87206629/125999676-39297fd8-5ab7-4b01-b41a-6bbd4ff16098.png){:target="_blank" rel="noopener"}
 
 # Second Milestone
 My second milestone was understanding the accelerometer. I first had to learn how to solder, so I could connect my ESP32 to the accelerometer. Through arduino, I put in a code which shows the acceleration, roatation, and the temperature of the accelerometer. I ran many trials through the accelerometer by tilting it around, seeing which coordinates on the rotations would go up or down if I tilt it in a specific way. Once I figured that out, I wrote a code where when the accelerometer tilts a certain direction, it prints out that corresponding direction. After that, I put in a code through arduino which shows the angle of the accelerometer, which would give it a more specific read. I did the same thing where I ran many trials to see which numbers would go up or down, when the accelerometer is tilted. It printed out with more accurate reads and results compared to the rotations. This is to move the robot, so for example, if I tilt forward with my hand, the robot would move forward. The accelerometer would control the robots movements.
