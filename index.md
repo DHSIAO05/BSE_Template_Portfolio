@@ -12,7 +12,8 @@ My final milestone was to add the specific movements to my car. So when I move m
 
 **Ultrasonic Sensor**
 
-https://user-images.githubusercontent.com/87206629/126558637-bd5793fe-0dc9-4182-aa06-3b40927b1738.gif
+![Ultrasonic Sensor](https://user-images.githubusercontent.com/87206629/126558760-7a5fd348-a0f6-4ffc-a7cc-a2bc17e696ff.gif)
+
 
 
 
