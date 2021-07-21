@@ -8,12 +8,16 @@ I am working on a gesture controlled car using arduino with an esp32 chip
 ![Gesture Controlled Car Image](https://bluestampengineering.com/wp-content/uploads/2020/05/edited_qR6z8Gq5H1-6-scaled.jpg)
   
 # Final Milestone
-My final milestone was
+My final milestone was to add the specific movements to my car. So when I move my accelerometer to a specific direction my car would move that direction.
 
-[![Final Milestone](https://user-images.githubusercontent.com/87206629/125999676-39297fd8-5ab7-4b01-b41a-6bbd4ff16098.png){:target="_blank" rel="noopener"}
+![Final Milestone](https://user-images.githubusercontent.com/87206629/125999676-39297fd8-5ab7-4b01-b41a-6bbd4ff16098.png){:target="_blank" rel="noopener"}
 
 # Second Milestone
 My second milestone was understanding the accelerometer. I first had to learn how to solder, so I could connect my ESP32 to the accelerometer. Through arduino, I put in a code which shows the acceleration, roatation, and the temperature of the accelerometer. I ran many trials through the accelerometer by tilting it around, seeing which coordinates on the rotations would go up or down if I tilt it in a specific way. Once I figured that out, I wrote a code where when the accelerometer tilts a certain direction, it prints out that corresponding direction. After that, I put in a code through arduino which shows the angle of the accelerometer, which would give it a more specific read. I did the same thing where I ran many trials to see which numbers would go up or down, when the accelerometer is tilted. It printed out with more accurate reads and results compared to the rotations. This is to move the robot, so for example, if I tilt forward with my hand, the robot would move forward. The accelerometer would control the robots movements. After that, I needed to sync my two ESP32 chips so that one would send a signal and one would receive that signal. I first needed to find the MAC addresses for the two ESP32 so they would get a signal to each other. Then, I knew that the accelerometer would be the one sending the signals, and my car would be receiving it.
+
+**ESP32 to Accelerometer Schematics**
+![image](https://user-images.githubusercontent.com/87206629/126555810-f163bbaf-c084-4277-ae30-dde799a2ab85.png)
+
 
 **Accelerometer Code**
 ```C++
