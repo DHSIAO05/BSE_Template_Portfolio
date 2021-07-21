@@ -8,12 +8,228 @@ I am working on a gesture controlled car using arduino with an esp32 chip
 ![Gesture Controlled Car Image](https://bluestampengineering.com/wp-content/uploads/2020/05/edited_qR6z8Gq5H1-6-scaled.jpg)
   
 # Final Milestone
-...
+My final milestone was
 
 [![Final Milestone](https://user-images.githubusercontent.com/87206629/125999676-39297fd8-5ab7-4b01-b41a-6bbd4ff16098.png){:target="_blank" rel="noopener"}
 
 # Second Milestone
-My second milestone was understanding the accelerometer. I first had to learn how to solder, so I could connect my ESP32 to the accelerometer. Through arduino, I put in a code which shows the acceleration, roatation, and the temperature of the accelerometer. I ran many trials through the accelerometer by tilting it around, seeing which coordinates on the rotations would go up or down if I tilt it in a specific way. Once I figured that out, I wrote a code where when the accelerometer tilts a certain direction, it prints out that corresponding direction. After that, I put in a code through arduino which shows the angle of the accelerometer, which would give it a more specific read. I did the same thing where I ran many trials to see which numbers would go up or down, when the accelerometer is tilted. It printed out with more accurate reads and results compared to the rotations. This is to move the robot, so for example, if I tilt forward with my hand, the robot would move forward. The accelerometer would control the robots movements.
+My second milestone was understanding the accelerometer. I first had to learn how to solder, so I could connect my ESP32 to the accelerometer. Through arduino, I put in a code which shows the acceleration, roatation, and the temperature of the accelerometer. I ran many trials through the accelerometer by tilting it around, seeing which coordinates on the rotations would go up or down if I tilt it in a specific way. Once I figured that out, I wrote a code where when the accelerometer tilts a certain direction, it prints out that corresponding direction. After that, I put in a code through arduino which shows the angle of the accelerometer, which would give it a more specific read. I did the same thing where I ran many trials to see which numbers would go up or down, when the accelerometer is tilted. It printed out with more accurate reads and results compared to the rotations. This is to move the robot, so for example, if I tilt forward with my hand, the robot would move forward. The accelerometer would control the robots movements. After that, I needed to sync my two ESP32 chips so that one would send a signal and one would receive that signal. I first needed to find the MAC addresses for the two ESP32 so they would get a signal to each other. Then, I knew that the accelerometer would be the one sending the signals, and my car would be receiving it.
+
+**Accelerometer Code**
+```C++
+#include<Wire.h>
+#include<TwoWayESP.h>
+const uint8_t otherESPAddr[6] = {0x08, 0x3A, 0xF2, 0x6C, 0xFE, 0xE8 };
+
+const int MPU_addr = 0x68;
+int16_t AcX, AcY, AcZ, Tmp, GyX, GyY, GyZ;
+
+int minVal = 265;
+int maxVal = 402;
+
+double x;
+double y;
+double z;
+
+void setup() {
+  TwoWayESP::Begin(otherESPAddr);
+  Wire.begin();
+  Wire.beginTransmission(MPU_addr);
+  Wire.write(0x6B);
+  Wire.write(0);
+  Wire.endTransmission(true);
+  Serial.begin(115200);
+}
+void loop() {
+  Wire.beginTransmission(MPU_addr);
+  Wire.write(0x3B);
+  Wire.endTransmission(false);
+  Wire.requestFrom(MPU_addr, 14, true);
+  AcX = Wire.read() << 8 | Wire.read();
+  AcY = Wire.read() << 8 | Wire.read();
+  AcZ = Wire.read() << 8 | Wire.read();
+  int xAng = map(AcX, minVal, maxVal, -90, 90);
+  int yAng = map(AcY, minVal, maxVal, -90, 90);
+  int zAng = map(AcZ, minVal, maxVal, -90, 90);
+
+  x = RAD_TO_DEG * (atan2(-yAng, -zAng) + PI);
+  y = RAD_TO_DEG * (atan2(-xAng, -zAng) + PI);
+  z = RAD_TO_DEG * (atan2(-yAng, -xAng) + PI);
+
+  Serial.print("AngleX= ");
+  Serial.println(x);
+
+  Serial.print("AngleY= ");
+  Serial.println(y);
+
+  Serial.print("AngleZ= ");
+  Serial.println(z);
+  Serial.println("-----------------------------------------");
+  delay(10);
+
+  String send;
+  if (x >= 40 && x <= 100) {
+    send = "Forward";
+    Serial.println(send);
+  }
+  else if (x <= 310 && x >= 260) {
+    send = "Backward";
+    Serial.println(send);
+  }
+
+  else if (y >= 100 && y <= 200) {
+    send = "Right";
+    Serial.println(send);
+  }
+  else if (y <= 65 && y >= 0) {
+    send = "Left";
+    Serial.println(send);
+  }
+  else {
+    send = "Stopped";
+    Serial.println(send);
+  }
+ TwoWayESP::SendString(send);
+}
+```
+
+**Receiver Code**
+```C++
+#include <TwoWayESP.h>
+
+int motor1Pin1 = 27;
+int motor1Pin2 = 26;
+int enable1Pin = 14;
+int motor2Pin1 = 32;
+int motor2Pin2 = 33;
+int enable2Pin = 25;
+
+// Setting PWM properties
+const int freq = 30000;
+const int pwmChannel = 0;
+const int resolution = 8;
+int dutyCycle = 255;
+
+// defines pins numbers
+const int trigPin = 16;
+const int echoPin = 17;
+// defines variables
+long duration;
+int distance;
+
+// Make this the OTHER ESPs mac address
+// The mac address can be found by uploading this program
+// It will be output on the serial terminal
+const uint8_t otherESPAddr[6] = {0x08, 0x3A, 0xF2, 0x6D, 0x07, 0xEC };
+
+void setup() {
+  // sets the pins as outputs:
+  pinMode(motor1Pin1, OUTPUT);
+  pinMode(motor1Pin2, OUTPUT);
+  pinMode(enable1Pin, OUTPUT);
+  pinMode(motor2Pin1, OUTPUT);
+  pinMode(motor2Pin2, OUTPUT);
+  pinMode(enable2Pin, OUTPUT);
+
+  // configure LED PWM functionalitites
+  ledcSetup(pwmChannel, freq, resolution);
+
+  // attach the channel to the GPIO to be controlled
+  ledcAttachPin(enable1Pin, pwmChannel);
+  ledcAttachPin(enable2Pin, pwmChannel);
+
+  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
+  pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+
+  Serial.begin(115200);
+
+  // Begin TwoWayESP with the other ESPs mac
+  TwoWayESP::Begin(otherESPAddr);
+}
+
+void loop() {
+  // Clears the trigPin
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  // Sets the trigPin on HIGH state for 10 micro seconds
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  // Reads the echoPin, returns the sound wave travel time in microseconds
+  duration = pulseIn(echoPin, HIGH);
+  // Calculating the distance
+  distance = duration * 0.034 / 2;
+  // Prints the distance on the Serial Monitor
+  Serial.print("Distance: ");
+  Serial.println(distance);
+  // Check if there is an available read
+  if (TwoWayESP::Available()) {
+    //Serial.print("[Incoming] String data: ");
+    //Serial.println(TwoWayESP::GetString());
+    String message = TwoWayESP::GetString();
+    Serial.println(message);
+    if (message == "Forwar") {
+      if (distance > 10) {
+        int dutyCycle = 255;
+        digitalWrite(motor1Pin1, LOW);
+        digitalWrite(motor1Pin2, HIGH);
+        digitalWrite(motor2Pin1, LOW);
+        digitalWrite(motor2Pin2, HIGH);
+        ledcWrite(pwmChannel, dutyCycle);
+      }
+      else {
+        digitalWrite(motor1Pin1, LOW);
+        digitalWrite(motor1Pin2, LOW);
+        digitalWrite(motor2Pin1, LOW);
+        digitalWrite(motor2Pin2, LOW);
+      }
+    }
+    else if (message == "Backwar") {
+      int dutyCycle = 255;
+      digitalWrite(motor1Pin1, HIGH);
+      digitalWrite(motor1Pin2, LOW);
+      digitalWrite(motor2Pin1, HIGH);
+      digitalWrite(motor2Pin2, LOW);
+      ledcWrite(pwmChannel, dutyCycle);
+    }
+    else if (message == "Lef") {
+      int dutyCycle = 255;
+      digitalWrite(motor1Pin1, HIGH);
+      digitalWrite(motor1Pin2, LOW);
+      digitalWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, HIGH);
+      ledcWrite(pwmChannel, dutyCycle);
+    }
+    else if (message == "Righ") {
+      int dutyCycle = 255;
+      digitalWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, HIGH);
+      digitalWrite(motor2Pin1, HIGH);
+      digitalWrite(motor2Pin2, LOW);
+      ledcWrite(pwmChannel, dutyCycle);
+    }
+    else if (message == "Stoppe") {
+      digitalWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, LOW);
+      digitalWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, LOW);
+    }
+    else {
+      Serial.println("error");
+    }
+    // Output send string to serial terminal
+    //String send = "I am sending data to another ESP!";
+    //Serial.print("[Outgoing] String data: ");
+    //Serial.println(send);
+
+    // Send some string to the other ESP
+    //TwoWayESP::SendString(send);
+
+    // Delay to not overrun the memory limit
+    //delay(2000);
+  }
+}
+```
 
 [![Second Milestone](https://res.cloudinary.com/marcomontalbano/image/upload/v1626808458/video_to_markdown/images/youtube--BjxW1DclkYA-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/BjxW1DclkYA "Second Milestone"){:target="_blank" rel="noopener"}
 # First Milestone
