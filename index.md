@@ -217,16 +217,6 @@ void loop() {
     else {
       Serial.println("error");
     }
-    // Output send string to serial terminal
-    //String send = "I am sending data to another ESP!";
-    //Serial.print("[Outgoing] String data: ");
-    //Serial.println(send);
-
-    // Send some string to the other ESP
-    //TwoWayESP::SendString(send);
-
-    // Delay to not overrun the memory limit
-    //delay(2000);
   }
 }
 ```
