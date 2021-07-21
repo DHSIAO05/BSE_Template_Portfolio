@@ -8,7 +8,92 @@ I am working on a gesture controlled car using arduino with an esp32 chip
 ![Gesture Controlled Car Image](https://bluestampengineering.com/wp-content/uploads/2020/05/edited_qR6z8Gq5H1-6-scaled.jpg)
   
 # Final Milestone
-My final milestone was to add the specific movements to my car. So when I move my accelerometer to a specific direction my car would move that direction.
+My final milestone was to add the specific movements to my car. So when I move my accelerometer to a specific direction my car would move that direction. For moving forward and backward, it was pretty easy to code, but when I coded for it to turn left or right, I had a little confusion. I realized if I wanted my car to turn left, I would make the two left wheels move forward and the two right wheels move backward or vice versa when I wanted it to turn right. After I coded everything, I tested my car, if the wheels would move and at first, it did move, but at a really slow pace. I figured out that my dutyCycle in my arduino was at 200, so I changed it to 255 which is the max. I uploaded and tested it after and my car moved smoothly. I was pretty much done with my base project and I just needed to tape everything on such as my ESP32, L298N Motor Driver, and the battery pack. I wanted to add modifications to my car, so I added an ultrasonic sensor. How it works is that the sensor emits sound waves, and then it waits for the sound to be reflected back, which calculates the distance based on the time required. This is to prevent my car from hitting a wall. I found a code where the serial monitor will print out the distance from the sensor to an object or wall. I then coded my forward movement so that, when the sensor is at a certain distance from an object, the forward motion would stop working and I could only turn right, left, or backwards. 
+
+**Ultrasonic Sensor Code**
+```C++
+// defines pins numbers
+const int trigPin = 6;
+const int echoPin = 5;
+// defines variables
+long duration;
+int distance;
+void setup() {
+pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
+pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+Serial.begin(9600); // Starts the serial communication
+}
+void loop() {
+// Clears the trigPin
+digitalWrite(trigPin, LOW);
+delayMicroseconds(2);
+// Sets the trigPin on HIGH state for 10 micro seconds
+digitalWrite(trigPin, HIGH);
+delayMicroseconds(10);
+digitalWrite(trigPin, LOW);
+// Reads the echoPin, returns the sound wave travel time in microseconds
+duration = pulseIn(echoPin, HIGH);
+// Calculating the distance
+distance= duration*0.034/2;
+// Prints the distance on the Serial Monitor
+Serial.print("Distance: ");
+Serial.println(distance);
+}
+```
+
+**Car Movement Code**
+```C++
+ if (message == "Forwar") {
+      if (distance > 10) {
+        int dutyCycle = 255;
+        digitalWrite(motor1Pin1, LOW);
+        digitalWrite(motor1Pin2, HIGH);
+        digitalWrite(motor2Pin1, LOW);
+        digitalWrite(motor2Pin2, HIGH);
+        ledcWrite(pwmChannel, dutyCycle);
+      }
+      else {
+        digitalWrite(motor1Pin1, LOW);
+        digitalWrite(motor1Pin2, LOW);
+        digitalWrite(motor2Pin1, LOW);
+        digitalWrite(motor2Pin2, LOW);
+      }
+    }
+    else if (message == "Backwar") {
+      int dutyCycle = 255;
+      digitalWrite(motor1Pin1, HIGH);
+      digitalWrite(motor1Pin2, LOW);
+      digitalWrite(motor2Pin1, HIGH);
+      digitalWrite(motor2Pin2, LOW);
+      ledcWrite(pwmChannel, dutyCycle);
+    }
+    else if (message == "Lef") {
+      int dutyCycle = 255;
+      digitalWrite(motor1Pin1, HIGH);
+      digitalWrite(motor1Pin2, LOW);
+      digitalWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, HIGH);
+      ledcWrite(pwmChannel, dutyCycle);
+    }
+    else if (message == "Righ") {
+      int dutyCycle = 255;
+      digitalWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, HIGH);
+      digitalWrite(motor2Pin1, HIGH);
+      digitalWrite(motor2Pin2, LOW);
+      ledcWrite(pwmChannel, dutyCycle);
+    }
+    else if (message == "Stoppe") {
+      digitalWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, LOW);
+      digitalWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, LOW);
+    }
+    else {
+      Serial.println("error");
+    }
+```
+
 
 ![Final Milestone](https://user-images.githubusercontent.com/87206629/125999676-39297fd8-5ab7-4b01-b41a-6bbd4ff16098.png){:target="_blank" rel="noopener"}
 
