@@ -8,7 +8,7 @@ I am working on a gesture controlled car using arduino with an esp32 chip
 ![Gesture Controlled Car Image](https://bluestampengineering.com/wp-content/uploads/2020/05/edited_qR6z8Gq5H1-6-scaled.jpg)
   
 # Demo Night
-This is my Demo Night Presentation where I talked about the modifications I added to my car.
+This is my Demo Night Presentation where I talked about the modifications I added to my car. I specifically talked about the ultrasonic sensor and the science behind it. I  continued talking about how it is used in my car. I showed a demo of it and later showed the LED I installed. I then talk about my favorite and hardest part of the whole project and asked the audience for any questions. 
 
 
 [![Demo Night](https://res.cloudinary.com/marcomontalbano/image/upload/v1627067837/video_to_markdown/images/youtube--6xMbgw5My1g-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/6xMbgw5My1g "Demo Night") {:target="_blank" rel="noopener"}
