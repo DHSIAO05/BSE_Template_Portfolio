@@ -25,6 +25,9 @@ My final milestone was to add the specific movements to my car. So when I move m
 
 
 **Ultrasonic Sensor Code**
+<details>
+  <summary>Click to expand!</summary>
+  
 ```C++
 // defines pins numbers
 const int trigPin = 16;
@@ -107,6 +110,8 @@ Serial.println(distance);
       Serial.println("error");
     }
 ```
+  </details>
+
 
 
 [![David's Final Milestone](https://res.cloudinary.com/marcomontalbano/image/upload/v1627067431/video_to_markdown/images/youtube--EVWUg6BVQ-0-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/EVWUg6BVQ-0 "David's Final Milestone"){:target="_blank" rel="noopener"}
