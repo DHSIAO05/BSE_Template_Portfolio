@@ -17,6 +17,8 @@ This is my Demo Night Presentation where I talked about the modifications I adde
 # Final Milestone
 My final milestone was to add the specific movements to my car. So when I move my accelerometer to a specific direction my car would move that direction. For moving forward and backward, it was pretty easy to code, but when I coded for it to turn left or right, I had a little confusion. I realized if I wanted my car to turn left, I would make the two left wheels move forward and the two right wheels move backward or vice versa when I wanted it to turn right. After I coded everything, I tested my car, if the wheels would move and at first, it did move, but at a really slow pace. I figured out that my dutyCycle in my arduino was at 200, so I changed it to 255 which is the max. I uploaded and tested it after and my car moved smoothly. I was pretty much done with my base project and I just needed to tape everything on such as my ESP32, L298N Motor Driver, and the battery pack. I wanted to add modifications to my car, so I added an ultrasonic sensor. How it works is that the sensor emits sound waves, and then it waits for the sound to be reflected back, which calculates the distance based on the time required. This is to prevent my car from hitting a wall. I found a code where the serial monitor will print out the distance from the sensor to an object or wall. At first, when I checked the serial monitor, the sensor wouldn't get a read. I realized that the voltage input was at 3.3 instead of 5. I changed it to 5, and I successfully got a read. I then coded my forward movement so that, when the sensor is at a certain distance from an object, the forward motion would stop working and I could only turn right, left, or backwards. I also added an LED so whenever my car is stopped, the LED will light up.
 
+[![David's Final Milestone](https://res.cloudinary.com/marcomontalbano/image/upload/v1627067431/video_to_markdown/images/youtube--EVWUg6BVQ-0-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/EVWUg6BVQ-0 "David's Final Milestone"){:target="_blank" rel="noopener"}
+
 **Ultrasonic Sensor**
 
 ![Ultrasonic Sensor](https://user-images.githubusercontent.com/87206629/126558760-7a5fd348-a0f6-4ffc-a7cc-a2bc17e696ff.gif)
@@ -110,10 +112,10 @@ Serial.println(distance);
 
 
 
-[![David's Final Milestone](https://res.cloudinary.com/marcomontalbano/image/upload/v1627067431/video_to_markdown/images/youtube--EVWUg6BVQ-0-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/EVWUg6BVQ-0 "David's Final Milestone"){:target="_blank" rel="noopener"}
-
 # Second Milestone
 My second milestone was understanding the accelerometer. I first had to learn how to solder, so I could connect my ESP32 to the accelerometer. Through arduino, I put in a code which shows the acceleration, roatation, and the temperature of the accelerometer. I ran many trials through the accelerometer by tilting it around, seeing which coordinates on the rotations would go up or down if I tilt it in a specific way. Once I figured that out, I wrote a code where when the accelerometer tilts a certain direction, it prints out that corresponding direction. After that, I put in a code through arduino which shows the angle of the accelerometer, which would give it a more specific read. I did the same thing where I ran many trials to see which numbers would go up or down, when the accelerometer is tilted. It printed out with more accurate reads and results compared to the rotations. This is to move the robot, so for example, if I tilt forward with my hand, the robot would move forward. The accelerometer would control the robots movements. After that, I needed to sync my two ESP32 chips so that one would send a signal and one would receive that signal. I first needed to find the MAC addresses for the two ESP32 so they would get a signal to each other. Then, I knew that the accelerometer would be the one sending the signals, and my car would be receiving it.
+
+[![Second Milestone](https://res.cloudinary.com/marcomontalbano/image/upload/v1626808458/video_to_markdown/images/youtube--BjxW1DclkYA-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/BjxW1DclkYA "Second Milestone"){:target="_blank" rel="noopener"}
 
 **ESP32 to Accelerometer Schematics**
 
@@ -326,7 +328,6 @@ void loop() {
 }
 ```
 
-[![Second Milestone](https://res.cloudinary.com/marcomontalbano/image/upload/v1626808458/video_to_markdown/images/youtube--BjxW1DclkYA-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/BjxW1DclkYA "Second Milestone"){:target="_blank" rel="noopener"}
 # First Milestone
   
 
