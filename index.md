@@ -129,6 +129,9 @@ My second milestone was understanding the accelerometer. I first had to learn ho
 
 
 **Accelerometer Code**
+<details>
+  <summary>Click to expand!</summary>
+  
 ```C++
 #include<Wire.h>
 #include<TwoWayESP.h>
@@ -205,8 +208,12 @@ void loop() {
  TwoWayESP::SendString(send);
 }
 ```
+  </details>
 
 **Receiver Code**
+ <details>
+  <summary>Click to expand!</summary>   
+   
 ```C++
 #include <TwoWayESP.h>
 
@@ -333,6 +340,7 @@ void loop() {
   }
 }
 ```
+    </details>
 
 [![Second Milestone](https://res.cloudinary.com/marcomontalbano/image/upload/v1626808458/video_to_markdown/images/youtube--BjxW1DclkYA-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/BjxW1DclkYA "Second Milestone"){:target="_blank" rel="noopener"}
 # First Milestone
