@@ -27,8 +27,8 @@ My final milestone was to add the specific movements to my car. So when I move m
 **Ultrasonic Sensor Code**
 ```C++
 // defines pins numbers
-const int trigPin = 6;
-const int echoPin = 5;
+const int trigPin = 16;
+const int echoPin = 17;
 // defines variables
 long duration;
 int distance;
