@@ -57,8 +57,12 @@ Serial.print("Distance: ");
 Serial.println(distance);
 }
 ```
-
+</details>
+  
 **Car Movement Code**
+<details>
+  <summary>Click to expand!</summary>
+  
 ```C++
  if (message == "Forwar") {
       if (distance > 10) {
