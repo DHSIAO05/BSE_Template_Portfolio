@@ -5,7 +5,7 @@ I am working on a gesture controlled car using arduino with an esp32 chip
 |:--:|:--:|:--:|:--:|
 | David Hsiao | Leland High School | Computer Engineer | Incoming Senior
 
-![Gesture Controlled Car Image](https://bluestampengineering.com/wp-content/uploads/2020/05/edited_qR6z8Gq5H1-6-scaled.jpg)
+![Gesture Controlled Car Image](file:///C:/Users/David%20Hsiao/Downloads/IMG_2421.jpg)
   
 # Demo Night
 This is my Demo Night Presentation where I talked about the modifications I added to my car. I specifically talked about the ultrasonic sensor and the science behind it and  continued talking about how it is used in my car. I showed a demo of the sensor working and later showed the LED I installed and how it was used. I then talk about my favorite and hardest part of the whole project and asked the audience for any questions. 
