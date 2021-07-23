@@ -353,7 +353,10 @@ My first milestone was building the car chassis and getting all of my motors to 
 **ESP32 to L298N Motor Driver Schematics**
 ![ESP32 to L298N Motor Driver Schematics](https://i1.wp.com/randomnerdtutorials.com/wp-content/uploads/2018/05/ESP32_1_DC_Motor_bb.png?quality=100&strip=all&ssl=1)
 
-**Motor Code**
+**Motor Test Code**
+   <details>
+  <summary>Click to expand!</summary>
+     
 ```C++
 // Motor A
 int motor1Pin1 = 27; 
@@ -439,3 +442,5 @@ void loop() {
   dutyCycle = 200;
 }
 ```
+</details>
+
