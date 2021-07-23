@@ -25,9 +25,6 @@ My final milestone was to add the specific movements to my car. So when I move m
 
 
 **Ultrasonic Sensor Code**
-<details>
-  <summary>Click to expand!</summary>
-  
 ```C++
 // defines pins numbers
 const int trigPin = 16;
@@ -57,12 +54,8 @@ Serial.print("Distance: ");
 Serial.println(distance);
 }
 ```
-</details>
   
 **Car Movement Code**
-<details>
-  <summary>Click to expand!</summary>
-  
 ```C++
  if (message == "Forwar") {
       if (distance > 10) {
@@ -114,7 +107,6 @@ Serial.println(distance);
       Serial.println("error");
     }
 ```
-  </details>
 
 
 
@@ -129,9 +121,6 @@ My second milestone was understanding the accelerometer. I first had to learn ho
 
 
 **Accelerometer Code**
-<details>
-  <summary>Click to expand!</summary>
-  
 ```C++
 #include<Wire.h>
 #include<TwoWayESP.h>
@@ -208,12 +197,8 @@ void loop() {
  TwoWayESP::SendString(send);
 }
 ```
-  </details>
 
 **Receiver Code**
- <details>
-  <summary>Click to expand!</summary>   
-   
 ```C++
 #include <TwoWayESP.h>
 
@@ -340,7 +325,6 @@ void loop() {
   }
 }
 ```
-   </details>
 
 [![Second Milestone](https://res.cloudinary.com/marcomontalbano/image/upload/v1626808458/video_to_markdown/images/youtube--BjxW1DclkYA-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/BjxW1DclkYA "Second Milestone"){:target="_blank" rel="noopener"}
 # First Milestone
@@ -354,9 +338,6 @@ My first milestone was building the car chassis and getting all of my motors to 
 ![ESP32 to L298N Motor Driver Schematics](https://i1.wp.com/randomnerdtutorials.com/wp-content/uploads/2018/05/ESP32_1_DC_Motor_bb.png?quality=100&strip=all&ssl=1)
 
 **Motor Test Code**
-   <details>
-  <summary>Click to expand!</summary>
-     
 ```C++
 // Motor A
 int motor1Pin1 = 27; 
@@ -442,5 +423,3 @@ void loop() {
   dutyCycle = 200;
 }
 ```
-</details>
-
