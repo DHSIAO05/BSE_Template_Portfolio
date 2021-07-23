@@ -341,6 +341,7 @@ My first milestone was building the car chassis and getting all of my motors to 
 [![First Milestone](https://res.cloudinary.com/marcomontalbano/image/upload/v1626377722/video_to_markdown/images/youtube--TvEqnt8vFWk-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.youtube.com/watch?v=TvEqnt8vFWk "David's First Milestone"){:target="_blank" rel="noopener"}
 
 **ESP32 to L298N Motor Driver Schematics**
+
 ![ESP32 to L298N Motor Driver Schematics](https://i1.wp.com/randomnerdtutorials.com/wp-content/uploads/2018/05/ESP32_1_DC_Motor_bb.png?quality=100&strip=all&ssl=1)
 
 **Motor Test Code**
